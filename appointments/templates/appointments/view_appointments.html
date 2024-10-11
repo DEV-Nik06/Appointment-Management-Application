@@ -1,0 +1,65 @@
+{% extends 'appointments/base.html' %}
+
+{% block link3 %}
+<a href="{% url 'logout' %}" class="hover:underline">Logout</a>
+{% endblock %}
+{% block link2 %}{% endblock %}
+{% block title %}Your Appointments{% endblock %}
+{% block content %}
+
+<div class="container mx-auto p-6 bg-gray-100 rounded-lg shadow-lg">
+    <h1 class="text-3xl font-bold mb-4 text-center text-gray-800">Your Appointments</h1>
+
+    {% if messages %}
+        <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-4" role="alert">
+            <ul class="messages">
+                {% for message in messages %}
+                    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    {% if appointments %}
+        <div class="overflow-x-auto text-center">
+            <table class="min-w-full bg-white border border-gray-300">
+                <thead>
+                    <tr>
+                        <!-- <th class="py-2 px-4 border-b">ID</th> -->
+                        <th class="py-2 px-4 border-b">Student</th>
+                        <th class="py-2 px-4 border-b">Staff</th>
+                        <th class="py-2 px-4 border-b">Date</th>
+                        <th class="py-2 px-4 border-b">Time</th>
+                        <th class="py-2 px-4 border-b">Description</th>
+                        <th class="py-2 px-4 border-b">Status</th>
+                        <th class="py-2 px-4 border-b">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for appointment in appointments %}
+                    <tr class="hover:bg-gray-100">
+                        <!-- <td class="py-2 px-4 border-b">{{ appointment.id }}</td> -->
+                        <td class="py-2 px-4 border-b">{{ appointment.student.username }}</td>
+                        <td class="py-2 px-4 border-b">{{ appointment.staff.name }}</td>
+                        <td class="py-2 px-4 border-b">{{ appointment.appointment_date }}</td>
+                        <td class="py-2 px-4 border-b">{{ appointment.appointment_time }}</td>
+                        <td class="py-2 px-4 border-b">{{ appointment.description }}</td>
+                        <td class="py-2 px-4 border-b">{{ appointment.status }}</td>
+                        <td class="py-2 px-4 border-b">
+                            {% if user.is_staff and appointment.status == 'pending' %}
+                                <a href="{% url 'confirm_appointment' appointment.id %}" class="bg-green-600 text-white px-2 py-1 rounded hover:bg-green-700 transition">Confirm</a>
+                                <a href="{% url 'cancel_appointment' appointment.id %}" class="bg-red-600 text-white px-2 py-1 rounded hover:bg-red-700 transition">Cancel</a>
+                            {% endif %}
+                            <a href="{% url 'delete_appointment' appointment.id %}" class="bg-gray-600 text-white px-2 py-1 rounded hover:bg-gray-700 transition">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <p class="text-center text-gray-500">No appointments found.</p>
+    {% endif %}
+</div>
+
+{% endblock %}

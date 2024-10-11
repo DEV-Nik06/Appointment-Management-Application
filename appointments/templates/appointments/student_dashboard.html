@@ -1,0 +1,46 @@
+{% extends 'appointments/base.html' %}
+
+{% block title %}Student Dashboard{% endblock %}
+
+{% block link2 %}<li><a href="{% url 'book_appointment' %}" class="hover:underline">Book Appointments</a></li>{% endblock %}
+{% block link3 %}<a href="{% url 'logout' %}" class="hover:underline">Logout</a>{% endblock %}
+{% block link4 %}{% endblock %}
+
+{% block content %}
+<div class=" flex items-center justify-center bg-gray-100">
+    <div class="bg-white p-8 rounded shadow-md w-3/4">
+        <h1 class="text-2xl font-bold mb-4">Welcome, {{ user.username }}</h1>
+        <h2 class="text-xl font-semibold">Student Dashboard</h2>
+
+        <div class="mt-4">
+            <h3 class="text-lg font-semibold">Your Quick Links</h3>
+            <ul class="mt-2">
+                <li><a href="#" class="text-blue-500 hover:underline">Book Appointments</a></li>
+                <li><a href="#" class="text-blue-500 hover:underline">Access Course Materials</a></li>
+                <li><a href="#" class="text-blue-500 hover:underline">Join Study Groups</a></li>
+                <li><a href="#" class="text-blue-500 hover:underline">Submit Feedback</a></li>
+            </ul>
+        </div>
+
+        <div class="mt-6">
+            <h3 class="text-lg font-semibold">Upcoming Events</h3>
+            <p class="text-gray-600">Stay updated with the latest happenings in your college. Here are some upcoming events:</p>
+            <ul class="mt-2">
+                <li class="mb-2">📅 **Guest Lecture:** Innovations in Technology - Date: Oct 15, 2024</li>
+                <li class="mb-2">📅 **Workshop:** Resume Building - Date: Oct 20, 2024</li>
+                <li class="mb-2">📅 **Cultural Fest:** Annual Day Celebration - Date: Nov 5, 2024</li>
+            </ul>
+        </div>
+
+        <div class="mt-6">
+            <h3 class="text-lg font-semibold">Resources</h3>
+            <p class="text-gray-600">Access various resources to help you succeed:</p>
+            <ul class="mt-2">
+                <li><a href="#" class="text-blue-500 hover:underline">Library Resources</a></li>
+                <li><a href="#" class="text-blue-500 hover:underline">Online Tutorials</a></li>
+                <li><a href="#" class="text-blue-500 hover:underline">Counseling Services</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

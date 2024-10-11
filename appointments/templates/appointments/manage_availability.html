@@ -1,0 +1,73 @@
+{% extends 'appointments/base.html' %}
+
+{% block title %}Manage Availability{% endblock %}
+
+{% block link2 %}<li> <a href="{% url 'manage_availability_view' %}" class="hover:underline" >Manage availability</a> </li>{% endblock %}
+{% block link3 %}<a href="{% url 'logout' %}" class="hover:underline">Logout</a>{% endblock %}
+{% block link4 %}{% endblock %}
+
+{% block content %}
+<div class="flex flex-col  bg-contain bg-center bg-no-repeat" style="background-image: url('../../static/assest/fdsgfdArtboard-1-2048x1152-removebg-preview.png');">
+    <div class="flex items-center justify-center flex-1">
+        <div class="bg-white bg-opacity-75 shadow-lg rounded-lg p-8 w-full max-w-screen-lg">
+            <h2 class="text-3xl font-bold mb-6 text-center text-gray-800">Manage Your Availability</h2>
+
+            {% if messages %}
+                <div class="mb-4">
+                    {% for message in messages %}
+                        <div class="{% if message.tags == 'error' %}bg-red-500{% else %}bg-green-500{% endif %} text-white p-4 rounded mb-2">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <form method="post" class="space-y-4 text-center">
+                {% csrf_token %}
+                {{ form.as_p }}  <!-- Render the form fields -->
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded transition duration-200">
+                    Save Availability
+                </button>
+            </form>
+
+            <h3 class="text-2xl font-semibold mt-8">Your Availability Slots</h3>
+
+            {% if availabilities %}
+                <div class="overflow-x-auto mt-4">
+                    <table class="min-w-full table-auto text-left border-collapse border border-gray-200">
+                        <thead class="bg-gray-100">
+                            <tr>
+                                <th class="border border-gray-300 px-4 py-2">Date</th>
+                                <th class="border border-gray-300 px-4 py-2">Start Time</th>
+                                <th class="border border-gray-300 px-4 py-2">End Time</th>
+                                <th class="border border-gray-300 px-4 py-2">Days</th>
+                                <th class="border border-gray-300 px-4 py-2">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for slot in availabilities %}
+                            <tr class="hover:bg-gray-50">
+                                <td class="border border-gray-300 px-4 py-2">{{ slot.available_date }}</td>
+                                <td class="border border-gray-300 px-4 py-2">{{ slot.start_time }}</td>
+                                <td class="border border-gray-300 px-4 py-2">{{ slot.end_time }}</td>
+                                <td class="border border-gray-300 px-4 py-2">{{ slot.available_days|join:", " }}</td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    <form action="{% url 'delete_availability' slot.id %}" method="post">
+                                        {% csrf_token %}
+                                        <button type="submit" class="bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded transition duration-200">
+                                            Delete
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <p class="text-gray-600 mt-4 text-center">No availability slots found.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

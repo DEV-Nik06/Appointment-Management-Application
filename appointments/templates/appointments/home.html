@@ -1,0 +1,44 @@
+{% extends 'appointments/base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Hero Section with Image on the Right -->
+<section class="container mx-auto flex flex-col-reverse lg:flex-row items-center  py-12 lg:py-24">
+    <!-- Left Side: Text Content -->
+    <div class="lg:w-1/2 w-full text-center lg: space-y-6 pl-11">
+        <h1 class=" text-center text-4xl font-bold mb-4">Welcome to the Appointment Management System</h1>
+        <p class="text-lg mb-6">Easily manage your appointments, schedule meetings, and stay organized. Register or login to get started!</p>
+
+        <!-- Call-to-Action Buttons -->
+        <div class=" flex justify-center lg:justify-center gap-4">
+            <a href="{% url 'register' %}" class="bg-blue-500 text-white font-semibold py-2 px-6 rounded-lg shadow-lg hover:bg-blue-600 transition duration-300">Register</a>
+            <a href="{% url 'login' %}" class="bg-white text-blue-500 font-semibold py-2 px-6 rounded-lg shadow-lg hover:bg-blue-100 transition duration-300">Login</a>
+        </div>
+    </div>
+
+    <!-- Right Side: Image -->
+    <div class="lg:w-1/2 w-full flex justify-center  relative top-0">
+        <img src="../../static/assest/appointment.png" alt="Appointment Image" class="max-w-full h-auto ">
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="container mx-auto py-12 text-center">
+    <h2 class="text-2xl font-bold mb-8">Why Choose Our System?</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-gray-100 p-6 rounded-lg shadow-lg transform hover:scale-105 transition duration-300">
+            <h3 class="text-xl font-semibold mb-4">Easy to Use</h3>
+            <p>Our system is designed to be user-friendly, allowing you to book and manage appointments with ease.</p>
+        </div>
+        <div class="bg-gray-100 p-6 rounded-lg shadow-lg transform hover:scale-105 transition duration-300">
+            <h3 class="text-xl font-semibold mb-4">Efficient Scheduling</h3>
+            <p>Organize your appointments with a streamlined system that makes scheduling fast and effective.</p>
+        </div>
+        <div class="bg-gray-100 p-6 rounded-lg shadow-lg transform hover:scale-105 transition duration-300">
+            <h3 class="text-xl font-semibold mb-4">Real-Time Updates</h3>
+            <p>Stay on top of your schedule with real-time appointment updates and notifications.</p>
+        </div>
+    </div>
+</section>
+{% endblock %}

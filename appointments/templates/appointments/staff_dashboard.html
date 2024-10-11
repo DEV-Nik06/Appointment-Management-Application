@@ -1,0 +1,46 @@
+{% extends 'appointments/base.html' %}
+
+{% block title %}Staff Dashboard{% endblock %}
+
+{% block link2 %}<li><a href="{% url 'manage_availability_view' %}" class="hover:underline">Manage Availability</a></li>{% endblock %}
+{% block link3 %}<a href="{% url 'logout' %}" class="hover:underline">Logout</a>{% endblock %}
+{% block link4 %}{% endblock %}
+
+{% block content %}
+<div class=" flex items-center justify-center bg-gray-100">
+    <div class="bg-white p-8 rounded shadow-md w-3/4">
+        <h1 class="text-2xl font-bold mb-4">Welcome, {{ user.username }}</h1>
+        <h2 class="text-xl font-semibold">Staff Dashboard</h2>
+
+        <div class="mt-4">
+            <h3 class="text-lg font-semibold">Quick Actions</h3>
+            <ul class="mt-2 space-y-2">
+                <li><a href="#" class="text-blue-500 hover:underline">Manage Student Records</a></li>
+                <li><a href="#" class="text-blue-500 hover:underline">Upload Course Materials</a></li>
+                <li><a href="#" class="text-blue-500 hover:underline">Review Assignments</a></li>
+                <li><a href="#" class="text-blue-500 hover:underline">Schedule Meetings</a></li>
+            </ul>
+        </div>
+
+        <div class="mt-6">
+            <h3 class="text-lg font-semibold">Recent Updates</h3>
+            <p class="text-gray-600">Stay informed about the latest updates in your department:</p>
+            <ul class="mt-2 list-disc list-inside">
+                <li>📅 **Upcoming Staff Meeting:** Date: Oct 18, 2024</li>
+                <li>📅 **New Course Materials:** Check the latest uploads in your subject area.</li>
+                <li>🔔 **Student Feedback:** Review student feedback to improve your courses.</li>
+            </ul>
+        </div>
+
+        <div class="mt-6">
+            <h3 class="text-lg font-semibold">Resources</h3>
+            <p class="text-gray-600">Access essential resources for your role:</p>
+            <ul class="mt-2">
+                <li><a href="#" class="text-blue-500 hover:underline">Staff Handbook</a></li>
+                <li><a href="#" class="text-blue-500 hover:underline">Professional Development Courses</a></li>
+                <li><a href="#" class="text-blue-500 hover:underline">HR Resources</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

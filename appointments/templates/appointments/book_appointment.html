@@ -1,0 +1,52 @@
+{% extends 'appointments/base.html' %}
+{% block title %}Book Appointment{% endblock %}
+{% block link2 %}<li><a href="{% url 'book_appointment' %}" class="hover:underline">Book Appointments</a></li>{% endblock %}
+{% block link3 %}<a href="{% url 'logout' %}" class="hover:underline">Logout</a>{% endblock %}
+
+
+{% block content %}
+<div class="flex flex-col  bg-contain bg-center bg-no-repeat" style="background-image: url('../../static/assest/appointment-booking-with-calendar_52683-39831-removebg-preview.png');">
+    <div class="flex items-center justify-center flex-1">
+        <div class="bg-white bg-opacity-75 shadow-lg rounded-lg p-8 w-full max-w-screen-lg">        <h1 class="text-2xl font-semibold mb-6 text-gray-800 text-center">Book an Appointment</h1>
+        
+        {% if form.non_field_errors %}
+            <div class="bg-red-100 text-red-600 p-4 rounded mb-4">
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+
+        <form method="post" class="space-y-6">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="flex flex-col space-y-1">
+                    <label for="{{ field.id_for_label }}" class="text-sm font-medium text-gray-700">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.errors %}
+                        <p class="text-sm text-red-600">{{ field.errors }}</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            
+            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-md transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                Book Appointment
+            </button>
+        </form>
+    </div>
+</div>
+</div>
+<style>
+    input, select, textarea {
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 10px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    input:focus, select:focus, textarea:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        outline: none;
+    }
+</style>
+{% endblock %}

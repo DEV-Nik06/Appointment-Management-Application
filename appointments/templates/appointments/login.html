@@ -1,0 +1,68 @@
+{% extends 'appointments/base.html' %}
+
+{% load static %}  
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="flex min-h-screen">
+    <!-- Left Section: Illustration (optional) -->
+    <div class="hidden lg:flex h-screen w-1/2 bg-blue-500 justify-center items-center">
+        <img class="w-3/4" src="{% static 'assest/secure-login-flat-style-design-illustration-stock-illustration-vector-removebg.png' %}" alt="Secure Login Illustration">
+    </div>
+
+    <!-- Right Section: Login Form -->
+    <div class="flex w-full lg:w-1/2 bg-gray-100 justify-center items-center">
+        <div class="bg-white p-8 rounded-xl w-full max-w-md shadow-lg">
+            <h1 class="text-3xl font-semibold mb-6 text-gray-800 text-center">Login to Your Account</h1>
+            
+            <form method="POST" class="space-y-6">
+                {% csrf_token %}
+                
+                {{ form.non_field_errors }}
+                
+                {% for field in form %}
+                    <div class="flex flex-col space-y-1">
+                        <label for="{{ field.id_for_label }}" class="text-sm font-medium text-gray-700">
+                            {{ field.label }}
+                        </label>
+                        {{ field }}
+                        <style>
+                            /* Style input fields */
+                            input, select, textarea {
+                                border: 1px solid #ccc; /* Light gray border */
+                                border-radius: 4px; /* Rounded corners */
+                                padding: 10px; /* Padding inside the input */
+                                width: 100%; /* Full width */
+                                box-sizing: border-box; /* Ensure padding and border are included */
+                            }
+
+                            /* Focused input fields */
+                            input:focus, select:focus, textarea:focus {
+                                border-color: #007bff; /* Blue border on focus */
+                                outline: none; /* Remove default outline */
+                                box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Soft shadow on focus */
+                            }
+                        </style>
+                        {% if field.errors %}
+                            <p class="text-sm text-red-600">{{ field.errors }}</p>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200">
+                    Login
+                </button>
+            </form>
+            
+            <p class="mt-6 text-center text-gray-600">
+                Don't have an account? 
+                <a href="{% url 'register' %}" class="text-blue-500 hover:text-blue-600 font-semibold">
+                    Register here
+                </a>
+            </p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

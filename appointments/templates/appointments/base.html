@@ -1,0 +1,46 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Appointment System{% endblock %}</title>
+    <link href="{% static 'appointments/tailwind-output.css' %}" rel="stylesheet"> <!-- Link to the built CSS -->
+</head>
+
+<body class="bg-gray-100 flex  flex-col min-h-screen">
+    <!-- Header -->
+    <header class="bg-blue-600 text-white py-4 shadow-md">
+        <div class="container mx-auto px-4">
+            <nav class="flex justify-between items-center">
+                <div class="text-lg font-semibold">
+                    <a href="{% url 'home' %}" class="hover:text-blue-300">Appointment System</a>
+                </div>
+                <ul class="flex gap-6">
+                    <li><a href="{% url 'home' %}" class="hover:text-blue-300">Home</a></li>
+                    <li><a href="{% url 'dashboard' %}" class="hover:text-blue-300">Dashboard</a></li>
+                    <li><a href="{% url 'view_appointments' %}" class="hover:text-blue-300">View Appointments</a></li>
+                    <li>{% block link2 %}<a href="{% url 'register' %}" class="hover:text-blue-300">Register</a>{% endblock %}</li>
+                    <li>{% block link3 %}<a href="{% url 'login' %}" class="hover:text-blue-300">Login</a>{% endblock %}</li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8 flex-grow">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-blue-600 text-white py-4 mt-auto shadow-inner">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2024 Appointment System. All Rights Reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>
