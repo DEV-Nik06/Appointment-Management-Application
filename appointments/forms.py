@@ -88,7 +88,11 @@ class AppointmentForm(forms.ModelForm):
 
 
 class StaffAvailabilityForm(forms.ModelForm):
-    available_date = forms.DateField(
+    start_date = forms.DateField(
+        widget=forms.DateInput(attrs={'type': 'date'}),
+        required=True,
+    )
+    end_date = forms.DateField(
         widget=forms.DateInput(attrs={'type': 'date'}),
         required=True,
     )
@@ -102,10 +106,10 @@ class StaffAvailabilityForm(forms.ModelForm):
     )
     available_days = forms.MultipleChoiceField(
         choices=[
-            ('Monday', 'Monday'), 
-            ('Tuesday', 'Tuesday'), 
-            ('Wednesday', 'Wednesday'), 
-            ('Thursday', 'Thursday'), 
+            ('Monday', 'Monday'),
+            ('Tuesday', 'Tuesday'),
+            ('Wednesday', 'Wednesday'),
+            ('Thursday', 'Thursday'),
             ('Friday', 'Friday')
         ],
         widget=forms.CheckboxSelectMultiple,
@@ -113,18 +117,26 @@ class StaffAvailabilityForm(forms.ModelForm):
     )
 
     class Meta:
-        model = Availability  # Ensure this is the correct model
-        fields = ['available_date', 'start_time', 'end_time', 'available_days']
+        model = Availability
+        fields = ['start_date', 'end_date', 'start_time', 'end_time', 'available_days']
 
     def clean(self):
         cleaned_data = super().clean()
         start_time = cleaned_data.get('start_time')
         end_time = cleaned_data.get('end_time')
+        start_date = cleaned_data.get('start_date')
+        end_date = cleaned_data.get('end_date')
 
-        # Ensure that the start_time is before the end_time
+        # Ensure that the start time is before the end time
         if start_time and end_time:
             if start_time >= end_time:
                 self.add_error('end_time', "End time must be after start time.")
 
+        # Ensure that the start date is before the end date
+        if start_date and end_date:
+            if start_date > end_date:
+                self.add_error('end_date', "End date must be after or equal to the start date.")
+
         return cleaned_data
+
 

@@ -119,9 +119,6 @@ def dashboard_view(request):
 
 
 
-from django.contrib import messages
-from django.shortcuts import get_object_or_404
-
 @login_required
 def manage_availability_view(request):
     if request.method == 'POST':
@@ -131,34 +128,37 @@ def manage_availability_view(request):
             availability = form.save(commit=False)
             availability.staff = request.user.staff  # Assuming user is related to Staff model
 
-            # Ensure start_time and end_time are not None
-            if availability.start_time and availability.end_time:
+            # Ensure start_time, end_time, start_date, and end_date are not None
+            if availability.start_time and availability.end_time and availability.start_date and availability.end_date:
                 # Check for overlapping availability slots
                 if Availability.objects.filter(
                     staff=availability.staff,
-                    available_date=availability.available_date,
+                    start_date__lte=availability.end_date,
+                    end_date__gte=availability.start_date,
                     start_time__lt=availability.end_time,  # Correct time comparison
                     end_time__gt=availability.start_time   # Correct time comparison
                 ).exists():
-                    messages.error(request, "Availability for this date and time already exists.")
+                    messages.error(request, "Availability for this date and time range already exists.")
                 else:
                     availability.save()  # Save the instance
                     messages.success(request, "Your availability has been updated successfully.")
                     return redirect('manage_availability_view')  # Stay on the same page after submission
             else:
-                messages.error(request, "Start time and end time are required.")
+                messages.error(request, "Start date, end date, start time, and end time are required.")
     else:
         form = StaffAvailabilityForm()
 
     # Fetch current availabilities for the logged-in staff member
     availabilities = Availability.objects.filter(staff=request.user.staff)
-    # Convert available_days from a stored string to a list
+    
+    # Convert available_days from a stored string to a list (if applicable)
     for availability in availabilities:
         if isinstance(availability.available_days, str):
             availability.available_days = availability.available_days.strip('[]').replace("'", "").split(', ')
 
-
     return render(request, 'appointments/manage_availability.html', {'form': form, 'availabilities': availabilities})
+
+
 
 # New view to handle deleting availability
 @login_required

@@ -2,12 +2,16 @@
 
 {% block title %}Manage Availability{% endblock %}
 
-{% block link2 %}<li> <a href="{% url 'manage_availability_view' %}" class="hover:underline" >Manage availability</a> </li>{% endblock %}
-{% block link3 %}<a href="{% url 'logout' %}" class="hover:underline">Logout</a>{% endblock %}
+{% block link2 %}
+<li><a href="{% url 'manage_availability_view' %}" class="hover:underline">Manage availability</a></li>
+{% endblock %}
+{% block link3 %}
+<a href="{% url 'logout' %}" class="hover:underline">Logout</a>
+{% endblock %}
 {% block link4 %}{% endblock %}
 
 {% block content %}
-<div class="flex flex-col  bg-contain bg-center bg-no-repeat" style="background-image: url('../../static/assest/fdsgfdArtboard-1-2048x1152-removebg-preview.png');">
+<div class="flex flex-col bg-contain bg-center bg-no-repeat" style="background-image: url('../../static/assest/fdsgfdArtboard-1-2048x1152-removebg-preview.png');">
     <div class="flex items-center justify-center flex-1">
         <div class="bg-white bg-opacity-75 shadow-lg rounded-lg p-8 w-full max-w-screen-lg">
             <h2 class="text-3xl font-bold mb-6 text-center text-gray-800">Manage Your Availability</h2>
@@ -37,7 +41,8 @@
                     <table class="min-w-full table-auto text-left border-collapse border border-gray-200">
                         <thead class="bg-gray-100">
                             <tr>
-                                <th class="border border-gray-300 px-4 py-2">Date</th>
+                                <th class="border border-gray-300 px-4 py-2">Start Date</th>
+                                <th class="border border-gray-300 px-4 py-2">End Date</th>
                                 <th class="border border-gray-300 px-4 py-2">Start Time</th>
                                 <th class="border border-gray-300 px-4 py-2">End Time</th>
                                 <th class="border border-gray-300 px-4 py-2">Days</th>
@@ -47,7 +52,8 @@
                         <tbody>
                             {% for slot in availabilities %}
                             <tr class="hover:bg-gray-50">
-                                <td class="border border-gray-300 px-4 py-2">{{ slot.available_date }}</td>
+                                <td class="border border-gray-300 px-4 py-2">{{ slot.start_date }}</td>
+                                <td class="border border-gray-300 px-4 py-2">{{ slot.end_date }}</td>
                                 <td class="border border-gray-300 px-4 py-2">{{ slot.start_time }}</td>
                                 <td class="border border-gray-300 px-4 py-2">{{ slot.end_time }}</td>
                                 <td class="border border-gray-300 px-4 py-2">{{ slot.available_days|join:", " }}</td>
