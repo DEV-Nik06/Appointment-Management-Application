@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import Group
 from django.contrib import messages
-from ..forms import UserRegistrationForm
+from appointments.forms import UserRegistrationForm
 
 # Registration View
 def register_view(request):
