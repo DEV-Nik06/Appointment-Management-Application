@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.utils import timezone
 
+#Student
 
 class Student(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -13,6 +14,7 @@ class Student(models.Model):
     def __str__(self):
         return self.name
 
+#Staff
 
 class Staff(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -28,7 +30,7 @@ class Staff(models.Model):
 
 
 
-
+# Appointment
 
 class Appointment(models.Model):
     STATUS_CHOICES = [
@@ -70,6 +72,7 @@ class Appointment(models.Model):
 
 
 
+# Availability
 
 class Availability(models.Model):
     staff = models.ForeignKey(Staff, on_delete=models.CASCADE, null=True, blank=True)

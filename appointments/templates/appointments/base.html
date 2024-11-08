@@ -22,7 +22,7 @@
                 <ul class="flex gap-6">
                     <li><a href="{% url 'home' %}" class="hover:text-blue-300">Home</a></li>
                     <li><a href="{% url 'dashboard' %}" class="hover:text-blue-300">Dashboard</a></li>
-                    <li><a href="{% url 'view_appointments' %}" class="hover:text-blue-300">View Appointments</a></li>
+                    <li>{% block link1 %}<a href="#" class="hover:text-blue-300">About</a>{% endblock %}</li>
                     <li>{% block link2 %}<a href="{% url 'register' %}" class="hover:text-blue-300">Register</a>{% endblock %}</li>
                     <li>{% block link3 %}<a href="{% url 'login' %}" class="hover:text-blue-300">Login</a>{% endblock %}</li>
                 </ul>

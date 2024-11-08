@@ -2,6 +2,7 @@
 
 {% block title %}Staff Dashboard{% endblock %}
 
+{% block link1 %}<li><a href="{% url 'view_appointments' %}" class="hover:underline">View appointments</a></li>{% endblock %}
 {% block link2 %}<li><a href="{% url 'manage_availability_view' %}" class="hover:underline">Manage Availability</a></li>{% endblock %}
 {% block link3 %}<a href="{% url 'logout' %}" class="hover:underline">Logout</a>{% endblock %}
 {% block link4 %}{% endblock %}

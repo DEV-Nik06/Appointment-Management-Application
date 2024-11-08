@@ -26,7 +26,6 @@ def home_view(request):
 
 
 
-
 @login_required
 def book_appointment(request):
     if request.method == 'POST':
@@ -35,8 +34,6 @@ def book_appointment(request):
             appointment_date = form.cleaned_data['appointment_date']
             appointment_time = form.cleaned_data['appointment_time']
             staff_member = form.cleaned_data['staff']
-
-           
 
             # Check for existing appointment
             if Appointment.objects.filter(
@@ -47,26 +44,76 @@ def book_appointment(request):
             ).exists():
                 form.add_error(None, 'An appointment with this staff member at the selected date and time already exists.')
             else:
-                # Check if the staff member is available at the specified date and time
+                # Check if the staff member has set their availability
                 availability = Availability.objects.filter(
-                    staff=staff_member,
-                    available_date=appointment_date,
-                    start_time__lte=appointment_time,
-                    end_time__gte=appointment_time
+                  staff=staff_member,
+                start_date__lte=appointment_date,
+                end_date__gte=appointment_date,
+                start_time__lte=appointment_time,
+                end_time__gte=appointment_time
                 ).exists()
 
-            if not availability:
-                    form.add_error(None, "The selected staff is not available at the chosen time.")
-            else:
+                if availability:
+                    # If availability is set, check if the staff is available
+                    if not availability:
+                        form.add_error(None, "The selected staff is not available at the chosen time.")
+                else:
+                    # If no availability is set, allow booking anyway and mark it as pending
+                    messages.warning(request, f"No availability set for {staff_member.user.username}. The appointment will be marked as pending until the staff updates their availability.")
+
                 # Create the appointment if it does not exist
                 appointment = form.save(commit=False)
                 appointment.student = request.user  # Assign the logged-in user as the student
+                appointment.status = 'pending'  # Mark as pending if no availability is set
                 appointment.save()  # Now save the instance
+
                 return redirect('view_appointments')
     else:
         form = AppointmentForm()
 
     return render(request, 'appointments/book_appointment.html', {'form': form})
+
+# @login_required
+# def book_appointment(request):
+#     if request.method == 'POST':
+#         form = AppointmentForm(request.POST)
+#         if form.is_valid():
+#             appointment_date = form.cleaned_data['appointment_date']
+#             appointment_time = form.cleaned_data['appointment_time']
+#             staff_member = form.cleaned_data['staff']
+
+           
+
+#             # Check for existing appointment
+#             if Appointment.objects.filter(
+#                 student=request.user,
+#                 staff=staff_member,
+#                 appointment_date=appointment_date,
+#                 appointment_time=appointment_time
+#             ).exists():
+#                 form.add_error(None, 'An appointment with this staff member at the selected date and time already exists.')
+#             else:
+#                 # Check if the staff member is available at the specified date and time
+#                availability = Availability.objects.filter(
+#                 staff=staff_member,
+#                 start_date__lte=appointment_date,
+#                 end_date__gte=appointment_date,
+#                 start_time__lte=appointment_time,
+#                 end_time__gte=appointment_time
+#             ).exists()
+
+#             if not availability:
+#                     form.add_error(None, "The selected staff is not available at the chosen time.")
+#             else:
+#                 # Create the appointment if it does not exist
+#                 appointment = form.save(commit=False)
+#                 appointment.student = request.user  # Assign the logged-in user as the student
+#                 appointment.save()  # Now save the instance
+#                 return redirect('view_appointments')
+#     else:
+#         form = AppointmentForm()
+
+#     return render(request, 'appointments/book_appointment.html', {'form': form})
 
 
 
