@@ -10,10 +10,21 @@
     <div class="hidden lg:flex h-screen w-1/2 bg-blue-500 justify-center items-center">
         <img class="w-3/4" src="{% static 'assest/secure-login-flat-style-design-illustration-stock-illustration-vector-removebg.png' %}" alt="Secure Login Illustration">
     </div>
+    
 
     <!-- Right Section: Login Form -->
     <div class="flex w-full lg:w-1/2 bg-gray-100 justify-center items-center">
+    
         <div class="bg-white p-8 rounded-xl w-full max-w-md shadow-lg">
+             {% if messages %}
+            <div class="{% if message.tags == 'error' %}bg-red-500{% else %}bg-green-500{% endif %} text-white p-4 rounded mb-2">
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
             <h1 class="text-3xl font-semibold mb-6 text-gray-800 text-center">Login to Your Account</h1>
             
             <form method="POST" class="space-y-6">
