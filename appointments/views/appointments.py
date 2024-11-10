@@ -21,11 +21,6 @@ def home_view(request):
 # book_appointment
 
 
-
-
-
-
-
 @login_required
 def book_appointment(request):
     if request.method == 'POST':
@@ -97,11 +92,6 @@ def dashboard_view(request):
     
 # manage_appointments_view 
 
-# from django.shortcuts import render, redirect
-# from django.contrib.auth.decorators import login_required
-# from .forms import StaffAvailabilityForm
-# from .models import StaffAvailability  # Ensure this is the correct import for your model
-# from django.contrib import messages
 
 
 
