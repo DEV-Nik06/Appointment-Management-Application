@@ -1,0 +1,78 @@
+{% extends 'appointments/base.html' %}
+
+{% block title %}About Us{% endblock %}
+
+{% block content %}
+
+<!-- About Section -->
+<section class="container mx-auto p-8 my-12 bg-white shadow-lg rounded-lg">
+    <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold  hover:text-blue-800 translate-x-2 transition-all duration-300 ease-in-out">About the Project</h2>
+        <p class="text-xl text-gray-700 leading-relaxed max-w-3xl mx-auto mt-4">
+            The Appointment Management System (AMS) is a web-based platform designed to facilitate easy appointment scheduling between students and staff. It allows students to book appointments with staff members, while staff can manage their availability and approve or reject appointments efficiently.
+        </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-12">
+        <!-- Key Features Section -->
+        <div>
+            <h3 class="text-2xl font-semibold  mb-6 transition-all duration-300 ease-in-out hover:text-blue-800 hover:translate-x-4">
+                Key Features
+              </h3>
+            
+            
+            <ul class="text-lg text-gray-700 space-y-4">
+                <li class="flex items-start space-x-4 feature-item">
+                    <span class=" text-2xl">🗓️</span>
+                    <span>Students can book appointments with available staff members.</span>
+                </li>
+                <li class="flex items-start space-x-4 feature-item">
+                    <span class=" text-2xl">👩‍🏫</span>
+                    <span>Staff can manage their availability and confirm or reject appointments.</span>
+                </li>
+                <li class="flex items-start space-x-4 feature-item">
+                    <span class="text-blue-600 text-2xl">🔒</span>
+                    <span>Separate login for students and staff members to ensure privacy.</span>
+                </li>
+                <li class="flex items-start space-x-4 feature-item">
+                    <span class=" text-2xl">📱</span>
+                    <span>Responsive design for both desktop and mobile devices.</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Technologies Used Section -->
+        <div>
+            <h3 class="text-2xl font-semibold  mb-6 hover:text-blue-800 translate-x-2 transition-all duration-300 ease-in-out">Technologies Used</h3>
+            <ul class="text-lg text-gray-700 space-y-4">
+                <li><strong class="font-semibold">Backend:</strong> Django (Python)</li>
+                <li><strong class="font-semibold">Frontend:</strong> HTML, TailwindCSS, JavaScript</li>
+                <li><strong class="font-semibold">Database:</strong> SQLite (Django's default)</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="mt-12 text-center">
+        <h3 class="text-2xl font-semibold  mb-6 hover:text-blue-800 translate-x-2 transition-all duration-300 ease-in-out">How It Works</h3>
+        <p class="text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto">
+            Students can log in and schedule an appointment with a staff member. Staff members can log in to view and manage their available time slots. They can accept or reject appointments based on their availability.
+        </p>
+    </div>
+
+    <div class="mt-12 text-center">
+        <h3 class="text-2xl font-semibold  mb-6 hover:text-blue-800 translate-x-2 transition-all duration-300 ease-in-out">Why Use This System?</h3>
+        <p class="text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto">
+            This system simplifies appointment scheduling for both students and staff, saving time and improving productivity. It allows seamless communication between both parties and offers better time management.
+        </p>
+    </div>
+</section>
+<style>
+        
+        .feature-item:hover {
+            transform: translateX(10px);
+            transition: all 0.3s ease;
+        }
+</style>
+{% endblock %} 
+
+

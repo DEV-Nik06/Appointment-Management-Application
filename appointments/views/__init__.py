@@ -12,4 +12,5 @@ from .appointments import (
     cancel_appointment,
     delete_appointment,
     delete_availability,
+    about_view,
 )

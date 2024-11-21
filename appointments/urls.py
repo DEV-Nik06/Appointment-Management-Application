@@ -14,6 +14,7 @@ from .views import (
     cancel_appointment,
     delete_appointment,
     delete_availability,
+    about_view,
 )
 
 
@@ -33,4 +34,5 @@ urlpatterns = [
     path('manage_appointments/', manage_availability_view, name='manage_availability_view'),
     path('book_appointment/', book_appointment, name='book_appointment'),
    path('delete_availability/<int:availability_id>/', delete_availability, name='delete_availability'),
+    path('about/', about_view, name='about'),
 ]

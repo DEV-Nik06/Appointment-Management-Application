@@ -3,19 +3,15 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  
   "scripts": {
-  "build-css": "tailwindcss -i ./appointments/static/appointments/tailwind.css -o ./appointments/static/appointments/tailwind-output.css --watch"
-},
-
+    "build-css": "tailwindcss -i ./appointments/static/appointments/tailwind.css -o ./appointments/static/appointments/tailwind-output.css --watch"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "autoprefixer": "^10.4.20",
-    "postcss": "^8.4.47",
-    "tailwindcss": "^3.4.13"
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.15"
   }
 }
-
-

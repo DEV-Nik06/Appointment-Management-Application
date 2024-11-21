@@ -207,3 +207,9 @@ def delete_appointment(request, appointment_id):
     else:
         messages.error(request, 'You do not have permission to delete this appointment.')
         return redirect('view_appointments')
+    
+
+# About
+
+def about_view(request):
+    return render(request, 'appointments/about.html')
