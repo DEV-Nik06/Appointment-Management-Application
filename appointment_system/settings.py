@@ -10,6 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+import dj_database_url
+import os
+
 from pathlib import Path
 
 
@@ -22,12 +25,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-$1b8u=%qe3brbaki@w6%9e4ih2^nxvk*su+!c8yktkuk#k%+0!'
+SECRET_KEY = os.environ.get("SECRET_KEY")
+
+# 'django-insecure-$1b8u=%qe3brbaki@w6%9e4ih2^nxvk*su+!c8yktkuk#k%+0!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
 
 
 
@@ -97,7 +102,12 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+database_url = os.environ.get("DATABASE_URL")
 
+DATABASES['default']= dj_database_url.parse(database_url)
+
+# External DB url 
+# "postgresql://appointmentdb_nrxy_user:0kH6hVvlKIF6jPmIN3L26b2F2lO4y3bF@dpg-ct5iv5hopnds73d8244g-a.oregon-postgres.render.com/appointmentdb_nrxy"
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
