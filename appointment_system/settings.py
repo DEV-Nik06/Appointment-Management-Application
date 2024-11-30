@@ -90,7 +90,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'appointment_system.wsgi.application'
+# WSGI_APPLICATION = 'appointment_system.wsgi.application'
 
 
 # Database
