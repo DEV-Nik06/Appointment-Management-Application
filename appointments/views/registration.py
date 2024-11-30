@@ -31,4 +31,4 @@ def register_view(request):
             messages.error(request, 'Please correct the errors below.')
     else:
         form = UserRegistrationForm()
-    return render(request, 'appointments/register.html', {'form': form})
+    return render(request, 'register.html', {'form': form})

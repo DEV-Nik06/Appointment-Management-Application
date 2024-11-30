@@ -12,7 +12,7 @@ from django.utils import timezone
 
 def home_view(request):
     
-        return render(request, 'appointments/home.html')
+        return render(request, 'home.html')
     
 
 
@@ -66,7 +66,7 @@ def book_appointment(request):
     else:
         form = AppointmentForm()
 
-    return render(request, 'appointments/book_appointment.html', {'form': form})
+    return render(request, 'book_appointment.html', {'form': form})
 
 
 
@@ -81,14 +81,14 @@ logger = logging.getLogger(__name__)
 def dashboard_view(request):
     if request.user.groups.filter(name='Staff').exists():
         logger.info(f'{request.user} accessed the staff dashboard.')
-        return render(request, 'appointments/staff_dashboard.html')
+        return render(request, 'staff_dashboard.html')
     elif request.user.groups.filter(name='Student').exists():
         logger.info(f'{request.user} accessed the student dashboard.')
-        return render(request, 'appointments/student_dashboard.html')
+        return render(request, 'student_dashboard.html')
    
     else:
         logger.info(f'{request.user} accessed the default dashboard.')
-        return render(request, 'appointments/home.html')
+        return render(request, 'home.html')
     
 # manage_appointments_view 
 
@@ -132,7 +132,7 @@ def manage_availability_view(request):
         if isinstance(availability.available_days, str):
             availability.available_days = availability.available_days.strip('[]').replace("'", "").split(', ')
 
-    return render(request, 'appointments/manage_availability.html', {'form': form, 'availabilities': availabilities})
+    return render(request, 'manage_availability.html', {'form': form, 'availabilities': availabilities})
 
 
 
@@ -167,7 +167,7 @@ def view_appointments(request):
 
     has_appointments = appointments.exists()  # Check if there are any appointments
 
-    return render(request, 'appointments/view_appointments.html', {'appointments': appointments, 'has_appointments': has_appointments})
+    return render(request, 'view_appointments.html', {'appointments': appointments, 'has_appointments': has_appointments})
 
 
 
@@ -212,4 +212,4 @@ def delete_appointment(request, appointment_id):
 # About
 
 def about_view(request):
-    return render(request, 'appointments/about.html')
+    return render(request, 'about.html')
