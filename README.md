@@ -16,9 +16,11 @@ This is a web-based Appointment Management System where students can book appoin
     Responsive Design: Optimized for both desktop and mobile devices.
 
 **Technologies Used**
+
     Backend: Django (Python)
     Frontend: HTML, TailwindCSS, JavaScript
     Database: SQLite (Django's default)
+    
 **Installation**
 
 **Clone the repository:*
